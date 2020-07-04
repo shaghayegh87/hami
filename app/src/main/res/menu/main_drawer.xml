@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:icon="@drawable/ic_megaphone"
+            android:id="@+id/nav_advertise"
+            android:title="@string/my_advertise" />
+        <item
+            android:icon="@drawable/ic_bookmark_black_24dp"
+            android:id="@+id/nav_bookmark"
+            android:title="@string/bookmarks" />
+        <!--<item-->
+            <!--android:id="@+id/nav_sales"-->
+            <!--android:title="فروش"-->
+            <!--/>-->
+
+
+        <!--<item-->
+            <!--android:id="@+id/nav_comparison"-->
+            <!--android:title="بررسی مدل" />-->
+
+        <!--<item-->
+            <!--android:id="@+id/nav_car_zero"-->
+            <!--android:title="قیمت صفر" />-->
+
+        <!--<item-->
+            <!--android:id="@+id/nav_settings_bill"-->
+            <!--android:title="قوانین و مقررات" />-->
+
+        <!--<item-->
+            <!--android:id="@+id/nav_cards"-->
+            <!--android:title="درباره ما" />-->
+
+        <item
+            android:icon="@drawable/ic_exit"
+            android:id="@+id/nav_exit"
+            android:title="خروج" />
+    </group>
+
+</menu>

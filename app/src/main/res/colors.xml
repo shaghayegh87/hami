@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="main_color">#ff6f60</color>
+    <color name="secondary_color">#6b6b6b</color>
+    <color name="colorPrimary">#FFC542</color>
+    <color name="colorPrimaryDark">#FFC542</color>
+    <color name="colorPrimaryLight">#FFC542</color>
+    <color name="colorGray">#6b6b6b</color>
+    <color name="colorGrayMedium">#817e7e</color>
+    <color name="colorGrayLight">#a1a0a0</color>
+    <color name="colorLight">#cccccc</color>
+    <color name="colorEditBackground">#f5e5dd</color>
+    <color name="colorButtonBackground">#FFC542</color>
+    <color name="colorAccent">#ff6f60</color>
+    <color name="colorInputText">#fff7ec</color>
+    <color name="colorBackground">#f8f8f8</color>
+    <color name="gray300">#E0E0E0</color>
+    <color name="red">#FF5757</color>
+    <color name="black">#000000</color>
+
+
+    <!--<color name="main_color">#ff6f60</color>-->
+    <!--<color name="secondary_color">#6b6b6b</color>-->
+    <!--<color name="main_color">#ff9a00</color>-->
+
+    <!--<color name="secondary_color">#BDBDBD</color>-->
+</resources>

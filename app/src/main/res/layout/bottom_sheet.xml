@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:paddingBottom="30dp"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/type_advertise"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hami"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/ir_sans"
+        android:padding="8dp"
+        android:id="@+id/btn_selected_hami"
+        android:textColor="#777"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/advertise"
+        android:id="@+id/btn_selected_advertise"
+        android:fontFamily="@font/ir_sans"
+        android:padding="8dp"
+        android:textColor="#777"
+        />
+
+</LinearLayout>

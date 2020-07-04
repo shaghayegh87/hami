@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="15dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/signIn"
+        android:id="@+id/txt_title"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/colorGrayLight"
+        android:textSize="@dimen/font_large"
+        />
+
+
+    <EditText
+        android:layout_below="@id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:inputType="number"
+        android:maxLength="11"
+        android:layout_marginTop="10dp"
+        android:textDirection="rtl"
+        android:background="@drawable/edit_text_rounded"
+        android:fontFamily="@font/iran_sans_bold"
+        android:hint="@string/login_number"
+        android:textSize="@dimen/font_large"
+        android:gravity="right"
+        android:padding="15dp"
+        android:id="@+id/edit_login_number"
+        android:textColor="@color/colorLight"
+        android:textColorHint="@color/colorLight"
+
+        />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_rounded"
+        android:text="@string/signIn_btn"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_medium"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp"
+        android:textStyle="bold"
+        android:id="@+id/btn_login"
+        android:layout_below="@id/edit_login_number"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/ir_sans"/>
+    <ProgressBar
+        android:layout_width="50dp"
+        android:id="@+id/progress_validation_code"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        android:indeterminateTintMode="src_in"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

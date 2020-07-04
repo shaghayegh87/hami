@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    <external-path-->
+
+<!--    <external-path-->
+<!--        name="root"-->
+<!--        path="." />-->
+<!--    <external-path name="my_images" path="." />-->
+<!--    <external-files-path name="files" path="." />-->
+<!--    <external-path name="my_images" path="." />-->
+<!--    <external-path name="external_files" path="."/>-->
+<!--    <external-path name="my_images"-->
+<!--        path="." />-->
+    <external-path
+    name="my_images"
+    path="Android/data/ir.makapps.hami/files" />//Don't forget to add package name here i.e. com.android.example
+</paths><!--    &lt;!&ndash;        name="my_images"&ndash;&gt;/sdcard/Pictures/hami20201003_141044.jpg-->
