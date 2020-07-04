@@ -7,24 +7,25 @@ import androidx.room.Query;
 import androidx.room.Update;
 import java.util.List;
 
+import ir.makapps.hami.model.NoteDetailModel;
 import ir.makapps.hami.model.NoteModel;
 
 
 @Dao
 public interface NoteDao {
     @Insert
-    void save(NoteModel noteModel);
+    void save(NoteDetailModel noteDetailModel);
 
     @Update
-    void update(NoteModel noteModel);
+    void update(NoteDetailModel noteDetailModel);
 
-    @Query("SELECT * FROM TBL_NOTE WHERE idObject LIKE :id")
-    NoteModel edit(int id);
+    @Query("SELECT * FROM TBL_NOTE_DETAIL WHERE idObject LIKE :id")
+    NoteDetailModel edit(int id);
 
     @Delete
-    void delete(NoteModel noteModel);
+    void delete(NoteDetailModel noteDetailModel);
 
-    @Query("SELECT * FROM tbl_note")
-    List<NoteModel> getAllNotes();
+    @Query("SELECT * FROM tbl_note_detail")
+    List<NoteDetailModel> getAllNotes();
 
 }

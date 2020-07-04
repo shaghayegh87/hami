@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso;
 
 import ir.makapps.hami.R;
 import ir.makapps.hami.model.MainBriefModel;
+import ir.makapps.hami.model.NoteDetailModel;
 import ir.makapps.hami.model.NoteModel;
 import ir.makapps.hami.screens.base.BaseViewHolder;
 
@@ -39,7 +40,7 @@ public class NoteViewHolder extends BaseViewHolder implements NoteRecyclerContra
 
 
     @Override
-    public void fillData(final NoteModel data) {
+    public void fillData(final NoteDetailModel data) {
         main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

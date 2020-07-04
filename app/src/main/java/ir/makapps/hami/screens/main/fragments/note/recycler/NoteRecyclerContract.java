@@ -2,6 +2,7 @@ package ir.makapps.hami.screens.main.fragments.note.recycler;
 
 
 import ir.makapps.hami.model.MainBriefModel;
+import ir.makapps.hami.model.NoteDetailModel;
 import ir.makapps.hami.model.NoteModel;
 import ir.makapps.hami.screens.base.BaseRecycler;
 
@@ -14,6 +15,6 @@ public interface NoteRecyclerContract {
         void sendToDetailActivity(int id);
     }
 
-    interface HomeViewHolder extends BaseRecycler.BaseHolder<NoteModel> {
+    interface HomeViewHolder extends BaseRecycler.BaseHolder<NoteDetailModel> {
     }
 }

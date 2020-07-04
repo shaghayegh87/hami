@@ -4,10 +4,12 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import ir.makapps.hami.model.NoteDetailModel;
 import ir.makapps.hami.model.NoteModel;
 import ir.makapps.hami.screens.main.fragments.note.NoteDao;
 
-@Database(entities = {NoteModel.class},version = 3,exportSchema = true)
+@Database(entities = {NoteDetailModel.class},version = 1,exportSchema = true)
 
 public abstract class AppDatabase extends RoomDatabase {
     public abstract NoteDao noteDao();
@@ -17,7 +19,7 @@ public abstract class AppDatabase extends RoomDatabase {
     {
         if (appDatabase == null)
         {
-            appDatabase = Room.databaseBuilder(context,AppDatabase.class,"db_hamipet").allowMainThreadQueries().build();
+            appDatabase = Room.databaseBuilder(context,AppDatabase.class,"db_hami").allowMainThreadQueries().build();
         }
         return appDatabase;
     }

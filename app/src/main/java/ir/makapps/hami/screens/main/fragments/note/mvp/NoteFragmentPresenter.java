@@ -14,6 +14,7 @@ import ir.makapps.hami.db.AppDatabase;
 import ir.makapps.hami.di.App;
 import ir.makapps.hami.model.HamiResponse;
 import ir.makapps.hami.model.MainBriefModel;
+import ir.makapps.hami.model.NoteDetailModel;
 import ir.makapps.hami.model.NoteModel;
 import ir.makapps.hami.screens.main.fragments.note.NoteDao;
 import ir.makapps.hami.screens.main.fragments.note.recycler.NoteRecyclerContract;
@@ -21,7 +22,7 @@ import ir.makapps.hami.utils.Utils;
 
 public class NoteFragmentPresenter implements NoteFragmentContract.Presenter {
 
-    List<NoteModel> NoteList;
+    List<NoteDetailModel> NoteList;
     NoteFragmentContract.View view;
     CompositeDisposable compositeDisposable;
     NoteFragmentContract.Model model;
@@ -80,7 +81,7 @@ public class NoteFragmentPresenter implements NoteFragmentContract.Presenter {
 
     @Override
     public void bindHomeViewHolder(int position, NoteRecyclerContract.HomeViewHolder holder) {
-        NoteModel model = NoteList.get(position);
+        NoteDetailModel model = NoteList.get(position);
         holder.fillData(model);
     }
 

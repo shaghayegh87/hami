@@ -7,6 +7,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ir.makapps.hami.model.HamiResponse;
 import ir.makapps.hami.model.MainModel;
+import ir.makapps.hami.model.NoteDetailModel;
 import ir.makapps.hami.model.NoteModel;
 import ir.makapps.hami.screens.main.fragments.note.NoteDao;
 import ir.makapps.hami.utils.Utils;
@@ -125,7 +126,7 @@ public class CreateNotePresenter implements CreateNoteContract.Presenter {
 
     @Override
     public void updateNote(int id, NoteDao noteDao) {
-        NoteModel model = noteDao.edit(id) != null ?  noteDao.edit(id) : new NoteModel();
+        NoteDetailModel model = noteDao.edit(id) != null ?  noteDao.edit(id) : new NoteDetailModel();
         String note = model.getText();
         view.showNote(note);
     }

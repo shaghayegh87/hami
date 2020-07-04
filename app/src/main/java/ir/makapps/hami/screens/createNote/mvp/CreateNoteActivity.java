@@ -12,6 +12,7 @@ import ir.makapps.hami.R;
 import ir.makapps.hami.db.AppDatabase;
 import ir.makapps.hami.di.App;
 import ir.makapps.hami.model.MainModel;
+import ir.makapps.hami.model.NoteDetailModel;
 import ir.makapps.hami.model.NoteModel;
 import ir.makapps.hami.screens.base.BaseActivity;
 import ir.makapps.hami.screens.createNote.dagger.CreateNoteModule;
@@ -87,7 +88,7 @@ public class CreateNoteActivity extends BaseActivity implements CreateNoteContra
 
     public void insertToLocalDb() {
         String noteText = edtCreateNote.getText().toString();
-        NoteModel model = noteDao.edit(detailId)!= null ? noteDao.edit(detailId) : new NoteModel();
+        NoteDetailModel model = noteDao.edit(detailId)!= null ? noteDao.edit(detailId) : new NoteDetailModel();
         if (noteText.length() > 0) {
             if (model.getIdObject() == 0) {
                 model.setIdObject(detailId);

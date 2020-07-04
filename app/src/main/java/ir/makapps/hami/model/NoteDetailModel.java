@@ -1,11 +1,10 @@
 package ir.makapps.hami.model;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.List;
-
-@Entity(tableName = "tbl_note")
-public class NoteModel {
+@Entity(tableName = "tbl_note_detail")
+public class NoteDetailModel {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -16,7 +15,6 @@ public class NoteModel {
     private String description;
     private String address;
     private String imagePath;
-    private List<String> imagePathList;
 
     public int getId() {
         return id;
@@ -82,11 +80,4 @@ public class NoteModel {
         this.imagePath = imagePath;
     }
 
-    public List<String> getImagePathList() {
-        return imagePathList;
-    }
-
-    public void setImagePathList(List<String> imagePathList) {
-        this.imagePathList = imagePathList;
-    }
 }
