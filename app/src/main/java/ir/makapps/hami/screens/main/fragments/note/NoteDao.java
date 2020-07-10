@@ -22,6 +22,9 @@ public interface NoteDao {
     @Query("SELECT * FROM TBL_NOTE_DETAIL WHERE idObject LIKE :id")
     NoteDetailModel edit(int id);
 
+    @Query("SELECT * FROM TBL_NOTE_DETAIL WHERE id LIKE :id")
+    NoteDetailModel select(int id);
+
     @Delete
     void delete(NoteDetailModel noteDetailModel);
 

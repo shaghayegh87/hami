@@ -1,5 +1,6 @@
 package ir.makapps.hami.screens.getValidationCode.mvp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,7 +15,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView;
+
 import javax.inject.Inject;
+
+import dmax.dialog.SpotsDialog;
 import ir.makapps.hami.R;
 import ir.makapps.hami.di.App;
 import ir.makapps.hami.screens.base.BaseActivity;
@@ -22,6 +26,8 @@ import ir.makapps.hami.screens.getToken.mvp.GetTokenActivity;
 import ir.makapps.hami.screens.getValidationCode.dagger.DaggerGetValidationCodeComponent;
 import ir.makapps.hami.screens.getValidationCode.dagger.GetValidationCodeModule;
 import ir.makapps.hami.utils.Utils;
+
+import static ir.makapps.hami.di.App.getContext;
 
 public class GetValidationCodeActivity extends BaseActivity implements GetValidationCodeContract.View {
 
@@ -34,14 +40,13 @@ public class GetValidationCodeActivity extends BaseActivity implements GetValida
     private String phoneNumber;
     private int valueOfIntent;
     private int time;
-    private AnimatedCircleLoadingView animatedCircleLoadingView;
+    private AlertDialog alertDialog;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter.attachView(this);
-        valueOfIntent = getIntent().getIntExtra("Token_Activity", 0);
         valueOfIntent = getIntent().getIntExtra("Token_Activity", 0);
         if (valueOfIntent == 1) {
             getTime();
@@ -64,7 +69,6 @@ public class GetValidationCodeActivity extends BaseActivity implements GetValida
         parentView = findViewById(R.id.constraintLayout_validation_main);
         editCheckNumber = findViewById(R.id.editCheckNumber);
         btnCheckNumber = findViewById(R.id.btnCheckNumber);
-//        animatedCircleLoadingView = animatedCircleLoadingView.findViewById(R.id.cir);
 
         btnCheckNumber.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,9 +76,8 @@ public class GetValidationCodeActivity extends BaseActivity implements GetValida
                 phoneNumber = editCheckNumber.getText().toString();
                 int securityNumber = 0;
                 if (!phoneNumber.isEmpty() && !phoneNumber.equals("") && phoneNumber.length() == 11 && phoneNumber.startsWith("09")) {
-                    startLoading();
+//                    startLoading();
                     securityNumber = presenter.getSecurityNumber(phoneNumber);
-                    Log.d("ssssssssss", securityNumber + "");
                     Utils.insertToHawk("phone_number", phoneNumber);
                     presenter.getData(phoneNumber, securityNumber);
                 } else if (!phoneNumber.equals("") || phoneNumber.length() > 11) {
@@ -90,17 +93,21 @@ public class GetValidationCodeActivity extends BaseActivity implements GetValida
         });
     }
 
-    private void startLoading() {
-//        animatedCircleLoadingView.startDeterminate();
+    public void createAlertDialogProgress() {
+        alertDialog = new SpotsDialog.Builder()
+                .setContext(this)
+                .setTheme(R.style.Custom)
+                .setMessage(R.string.loading)
+                .setCancelable(false)
+                .build();
+        alertDialog.show();
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        presenter.detachView();
-//    }
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+    }
 
 
     @Override
@@ -124,24 +131,15 @@ public class GetValidationCodeActivity extends BaseActivity implements GetValida
         Utils.showSnackbar(parentView, error, "red");
     }
 
-    @Override
-    public void successProgressBar() {
-//        animatedCircleLoadingView.stopOk();
-    }
 
     @Override
     public void hideProgressBar() {
-//        animatedCircleLoadingView.stopOk();
+        alertDialog.dismiss();
     }
 
     @Override
     public void showProgressBar() {
-        startLoading();
-    }
-
-    @Override
-    public void failureProgressBar() {
-//        animatedCircleLoadingView.stopFailure();
+        createAlertDialogProgress();
     }
 
     @Override
@@ -156,7 +154,7 @@ public class GetValidationCodeActivity extends BaseActivity implements GetValida
     public void changeColorToFirst() {
         editCheckNumber.setBackgroundResource(R.color.colorEditBackground);
         btnCheckNumber.setBackgroundResource(R.color.colorButtonBackground);
-        btnCheckNumber.setText("");
+        btnCheckNumber.setText(getContext().getResources().getString(R.string.check_number));
         btnCheckNumber.setEnabled(true);
         editCheckNumber.setEnabled(true);
     }
@@ -175,7 +173,7 @@ public class GetValidationCodeActivity extends BaseActivity implements GetValida
         new CountDownTimer(90000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                btnCheckNumber.setText(" ارسال مجدد بعد از "+"0:" + checkDigit(time)+" ثانیه ");
+                btnCheckNumber.setText(" ارسال مجدد بعد از " + "0:" + checkDigit(time) + " ثانیه ");
                 btnCheckNumber.setBackgroundResource(R.color.colorLight);
                 btnCheckNumber.setEnabled(false);
                 time--;

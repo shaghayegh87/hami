@@ -30,6 +30,7 @@ public class CreateNoteActivity extends BaseActivity implements CreateNoteContra
     NoteDao noteDao;
     ConstraintLayout constraintNote;
     int detailId;
+    String title,description,address,image,date,city;
     MainModel mainModel;
 
     @Override
@@ -38,7 +39,17 @@ public class CreateNoteActivity extends BaseActivity implements CreateNoteContra
         appDatabase = AppDatabase.getInstance(this);
         noteDao = appDatabase.noteDao();
         detailId = getIntent().getIntExtra("detail_id",0);
-//        mainModel = (MainModel) getIntent().getSerializableExtra("mainModel");
+        title = getIntent().getStringExtra("title");
+        description = getIntent().getStringExtra("description");
+        address = getIntent().getStringExtra("address");
+        image = getIntent().getStringExtra("image");
+        date = getIntent().getStringExtra("date");
+        city = getIntent().getStringExtra("city");
+
+
+
+
+
         presenter.attachView(this);
         presenter.updateNote(detailId,noteDao);
     }
@@ -92,7 +103,14 @@ public class CreateNoteActivity extends BaseActivity implements CreateNoteContra
         if (noteText.length() > 0) {
             if (model.getIdObject() == 0) {
                 model.setIdObject(detailId);
+                model.setAddress(address);
+                model.setDescription(description);
+                model.setImagePath(image);
+                model.setTitle(title);
+                model.setDate(date);
+                model.setCity(city);
                 model.setText(noteText);
+//                model.setDate();
                 noteDao.save(model);
                 Utils.showSnackbar(constraintNote,getApplicationContext().getResources().getString(R.string.insert_note_success),"green");
                 edtCreateNote.setText("");

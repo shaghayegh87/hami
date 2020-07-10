@@ -98,11 +98,9 @@ public class NoteFragmentPresenter implements NoteFragmentContract.Presenter {
     @Override
     public void getNoteList() {
         NoteList = noteDao.getAllNotes();
-        if(NoteList.size() == 0)
-        {
+        if (NoteList.size() == 0) {
             view.showNoContent();
-        }
-        else
-        view.refreshNoteList();
+        } else
+            view.refreshNoteList();
     }
 }

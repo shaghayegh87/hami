@@ -80,13 +80,10 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
     @Override
     public void getData() {
 
-        if(presenter.getInternet())
-        {
+        if (presenter.getInternet()) {
             showProgressBar();
             presenter.getMainList(0, "", 1);
-        }
-        else
-        {
+        } else {
             noContent.setText(Utils.errorInternet);
             showNoContent();
         }
@@ -122,6 +119,10 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
 
     @Override
     public void showProgressBar() {
+        createDialogProgress();
+    }
+
+    public void createDialogProgress() {
         alertDialog = new SpotsDialog.Builder()
                 .setContext(getContext())
                 .setTheme(R.style.Custom)

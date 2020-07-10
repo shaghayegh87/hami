@@ -17,7 +17,7 @@ import ir.makapps.hami.screens.base.BaseViewHolder;
 
 
 public class NoteViewHolder extends BaseViewHolder implements NoteRecyclerContract.HomeViewHolder {
-    private TextView title, description;
+    private TextView title, description,city;
     private ImageView img;
     private CardView main;
     private NoteRecyclerContract.HomeAdapter presenter;
@@ -26,6 +26,7 @@ public class NoteViewHolder extends BaseViewHolder implements NoteRecyclerContra
         super(parent, R.layout.home_list_item);
         this.presenter = presenter;
         title = itemView.findViewById(R.id.title_home);
+        city = itemView.findViewById(R.id.city_home);
         img = itemView.findViewById(R.id.img_banner);
         main = itemView.findViewById(R.id.card_main);
         description = itemView.findViewById(R.id.desc_home);
@@ -48,13 +49,14 @@ public class NoteViewHolder extends BaseViewHolder implements NoteRecyclerContra
             }
         });
 
-        title.setText(data.getId()+"");
-        description.setText(data.getText());
-//        if (data.getImage().equals("")) {
-//            Picasso.get().load(R.drawable.ic_picture).placeholder(R.drawable.ic_picture).into(img);
-//        } else {
-//            Picasso.get().load(data.getImage()).into(img);
-//        }
+        title.setText(data.getTitle());
+        city.setText(data.getCity());
+        description.setText(data.getDescription());
+        if (data.getImagePath().equals("")) {
+            Picasso.get().load(R.drawable.ic_picture).placeholder(R.drawable.ic_picture).into(img);
+        } else {
+            Picasso.get().load(data.getImagePath()).into(img);
+        }
 
 
     }

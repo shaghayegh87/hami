@@ -103,7 +103,11 @@ public class BookmarkFragmentPresenter implements BookmarkFragmentContract.Prese
                                    if(listHamiResponse.getResultCode() == 1)
                                    {
                                        hamiMainModelList = listHamiResponse.getResults();
-                                       view.refreshMainList();
+                                       if(hamiMainModelList.size()>0)
+                                       {
+                                           view.refreshMainList();
+                                       }
+
                                        if(hamiMainModelList.size() == 0)
                                        {
                                            view.showNoContent();

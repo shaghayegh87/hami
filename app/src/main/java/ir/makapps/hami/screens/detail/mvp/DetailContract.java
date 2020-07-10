@@ -4,6 +4,7 @@ import io.reactivex.Single;
 import ir.makapps.hami.db.AppDatabase;
 import ir.makapps.hami.model.HamiResponse;
 import ir.makapps.hami.model.MainModel;
+import ir.makapps.hami.model.NoteDetailModel;
 import ir.makapps.hami.screens.base.BasePresenter;
 import ir.makapps.hami.screens.base.BaseView;
 import ir.makapps.hami.screens.main.fragments.note.NoteDao;
@@ -12,6 +13,8 @@ public interface DetailContract {
 
     interface View extends BaseView {
         void showDetail(MainModel model);
+
+        void showNoteDetail(NoteDetailModel model);
 
         void showError(String error);
 
@@ -35,6 +38,8 @@ public interface DetailContract {
         void saveBookmark(int id);
 
         void deleteBookmark(int id);
+
+        void getNote(int noteId, NoteDao noteDao);
     }
 
     interface Model {

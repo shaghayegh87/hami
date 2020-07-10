@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dimen_basic">16dp</dimen>
-    <dimen name="dimen_font_size_medium">16dp</dimen>
-    <dimen name="dimen_font_size_large">18dp</dimen>
-    <dimen name="dimen_font_size_small">12dp</dimen>
+    <dimen name="dimen_font_size_medium">16sp</dimen>
+    <dimen name="dimen_font_size_large">18sp</dimen>
+    <dimen name="dimen_font_size_small">12sp</dimen>
     <dimen name="dimen_margin">8dp</dimen>
     <dimen name="dimen_padding">10dp</dimen>
     <dimen name="dimen_padding_box">10dp</dimen>
@@ -12,6 +12,6 @@
     <dimen name="font_small">12sp</dimen>
     <dimen name="font_medium">14sp</dimen>
     <dimen name="font_large">18sp</dimen>
-    <dimen name="button_size">18dp</dimen>
-    <dimen name="title_text_size">14dp</dimen>
+    <dimen name="button_size">20sp</dimen>
+    <dimen name="title_text_size">14sp</dimen>
 </resources>

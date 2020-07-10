@@ -180,11 +180,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         break;
 
                     case bookmark_id:
-                        if (bookmarkFragment == null) {
+//                        if (bookmarkFragment == null) {
                             bookmarkFragment = new BookmarkFragment();
                             mainPresenter.updateFragment(bookmarkFragment);
                             setFragment(bookmarkFragment);
-                        } else setFragment(bookmarkFragment);
+//                        } else setFragment(bookmarkFragment);
                         break;
 
 

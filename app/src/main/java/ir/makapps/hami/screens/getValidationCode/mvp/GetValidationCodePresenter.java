@@ -27,7 +27,13 @@ public class GetValidationCodePresenter implements GetValidationCodeContract.Pre
 
     @Override
     public void getData(String mobile, int securityNumber) {
-        validationCodeFromModel(mobile, securityNumber);
+        if(getInternet())
+        {
+            view.showProgressBar();
+            validationCodeFromModel(mobile, securityNumber);
+        }
+        else view.showError(Utils.errorInternet);
+
     }
 
     @Override
@@ -43,7 +49,7 @@ public class GetValidationCodePresenter implements GetValidationCodeContract.Pre
 
                     @Override
                     public void onSuccess(ValidationModel validationModel) {
-                        view.successProgressBar();
+                        view.hideProgressBar();
                         confirmCode = validationModel.getBody();
                         view.showConfirmCode(confirmCode);
                         Log.d("get_number", confirmCode + "");
@@ -53,7 +59,7 @@ public class GetValidationCodePresenter implements GetValidationCodeContract.Pre
 
                     @Override
                     public void onError(Throwable e) {
-                        view.failureProgressBar();
+                        view.hideProgressBar();
                         view.hideProgressBar();
                         view.changeColorToFirst();
                         view.showError(App.getContext().getString(R.string.failed_process));
@@ -83,7 +89,7 @@ public class GetValidationCodePresenter implements GetValidationCodeContract.Pre
 
     @Override
     public boolean getInternet() {
-        return false;
+        return Utils.networkInfo();
     }
 
 

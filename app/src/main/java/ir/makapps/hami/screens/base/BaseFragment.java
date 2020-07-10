@@ -19,9 +19,9 @@ public abstract class BaseFragment extends Fragment {
 
             rootView = inflater.inflate(getFragmentLayout(), container, false);
         }
-        injectDagger();
-        bindViews();
-        getData();
+//        injectDagger();
+//        bindViews();
+//        getData();
         return rootView;
     }
 
@@ -30,6 +30,10 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        injectDagger();
+        bindViews();
+        getData();
+//        getData();
 //        injectDagger();
 //        bindViews();
 

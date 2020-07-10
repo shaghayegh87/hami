@@ -29,7 +29,7 @@
     <string name="note">یادداشت</string>
     <string name="empty_note">یادداشتی نوشته نشده است.</string>
     <string name="show_google_map">نمایش موقعیت بر روی گوگل مپ</string>
-    <string name="show_edit_location_map">ثبت یا ویرایش موقعیت جغرافیایی</string>
+    <string name="show_edit_location_map">ثبت یا ویرایش موقعیت</string>
     <string name="add_address">آدرس محل</string>
     <string name="add_picture">اضافه کردن عکس</string>
     <string name="cities_list">لیست شهرها</string>
@@ -63,4 +63,9 @@
     <string name="empty_fields">فیلدها نباید خالی باشند.</string>
     <string name="loading">در حال دریافت اطلاعات</string>
     <string name="send_data">در حال ارسال اطلاعات</string>
+    <string name="mainmodel">mainModel</string>
+    <string name="city">شهز</string>
+    <string name="send">ارسال</string>
+    <string name="sendAgain">ارسال مجدد</string>
+    <string name="send_code">ارسال کد</string>
 </resources>

@@ -20,6 +20,7 @@ public interface BookmarkFragmentContract {
         void showNoContent();
         void sendDataToDetail(int id);
         void refreshMainList();
+        void removefromMainList();
     }
 
     interface Presenter extends  BasePresenter<BookmarkFragmentContract.View> , BookmarkRecyclerContract.HomeAdapter{

@@ -58,10 +58,6 @@ public class BookmarkFragment extends BaseFragment implements BookmarkFragmentCo
         progressBar = rootView.findViewById(R.id.progress);
         swipeRefreshLayout = rootView.findViewById(R.id.pullToRefresh);
         recyclerView = rootView.findViewById(R.id.rv_banners);
-
-
-
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -83,6 +79,7 @@ public class BookmarkFragment extends BaseFragment implements BookmarkFragmentCo
     @Override
     public void onStart() {
         super.onStart();
+//        presenter.getMainList(0,"",1);
     }
 
     @Override
@@ -93,6 +90,11 @@ public class BookmarkFragment extends BaseFragment implements BookmarkFragmentCo
     @Override
     public void refreshMainList() {
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void removefromMainList() {
+//        adapter.notifyItemRemoved();
     }
 
     @Override

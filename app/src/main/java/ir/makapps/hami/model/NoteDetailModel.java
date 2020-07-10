@@ -12,9 +12,11 @@ public class NoteDetailModel {
     private String text;
     private String title;
     private String date;
+    private String city;
     private String description;
     private String address;
     private String imagePath;
+    private boolean hasNote;
 
     public int getId() {
         return id;
@@ -72,6 +74,14 @@ public class NoteDetailModel {
         this.address = address;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getImagePath() {
         return imagePath;
     }
@@ -80,4 +90,13 @@ public class NoteDetailModel {
         this.imagePath = imagePath;
     }
 
+    public boolean isHasNote() {
+         if(getText().length()>0)
+             return  true;
+         else return false;
+    }
+
+    public void setHasNote(boolean hasNote) {
+        this.hasNote = hasNote;
+    }
 }

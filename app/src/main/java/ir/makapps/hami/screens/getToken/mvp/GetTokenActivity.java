@@ -1,7 +1,9 @@
 package ir.makapps.hami.screens.getToken.mvp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.view.View;
@@ -12,6 +14,7 @@ import com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView;
 
 import javax.inject.Inject;
 
+import dmax.dialog.SpotsDialog;
 import ir.makapps.hami.R;
 import ir.makapps.hami.di.App;
 import ir.makapps.hami.screens.base.BaseActivity;
@@ -21,16 +24,15 @@ import ir.makapps.hami.screens.getValidationCode.mvp.GetValidationCodeActivity;
 import ir.makapps.hami.screens.main.mvp.MainActivity;
 import ir.makapps.hami.utils.Utils;
 
-public class GetTokenActivity extends BaseActivity implements GetTokenContract.View {
+public class GetTokenActivity extends BaseActivity implements GetTokenContract.View, View.OnClickListener {
 
     @Inject
     GetTokenContract.Presenter presenter;
-    ConstraintLayout getParentView;
     private ConstraintLayout parentView;
     private EditText editCheckConfirmCode;
-    private Button btnGetToken;
+    private Button btnGetToken,btnSendAgain;
     private String phoneNumber;
-    private AnimatedCircleLoadingView animatedCircleLoadingView;
+    private AlertDialog alertDialog;
 
 
     @Override
@@ -53,37 +55,9 @@ public class GetTokenActivity extends BaseActivity implements GetTokenContract.V
         parentView = findViewById(R.id.constraintLayout_main);
         editCheckConfirmCode = findViewById(R.id.editCheckConfirmCode);
         btnGetToken = findViewById(R.id.btnGetToken);
-//        animatedCircleLoadingView = findViewById(R.id.circle_loading_view);
-        btnGetToken.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                phoneNumber = Utils.readFromHawk("phone_number", "");
-                String confirmCode = editCheckConfirmCode.getText().toString();
-                if (!confirmCode.isEmpty() && !confirmCode.equals("") && confirmCode.length() > 4 && !phoneNumber.equals("")) {
-                    startLoading();
-                    int code = Integer.parseInt(confirmCode);
-                    presenter.getData(phoneNumber, code);
-                } else if (confirmCode.equals("") || confirmCode.isEmpty()) {
-                    editCheckConfirmCode.setText("");
-                    Utils.showSnackbar(parentView, Utils.empty_confirm_number, "red");
-
-                } else {
-                    editCheckConfirmCode.setText("");
-                    Utils.showSnackbar(parentView, Utils.wrong_confirm_number, "red");
-                }
-            }
-        });
-
-    }
-
-    private void startLoading() {
-//        animatedCircleLoadingView.startDeterminate();
-    }
-
-
-    @Override
-    public void successProgressBar() {
-//        animatedCircleLoadingView.stopOk();
+        btnSendAgain = findViewById(R.id.btnSendAgain);
+        btnSendAgain.setOnClickListener(this);
+        btnGetToken.setOnClickListener(this);
     }
 
     @Override
@@ -111,23 +85,22 @@ public class GetTokenActivity extends BaseActivity implements GetTokenContract.V
 
     @Override
     public void hideProgressBar() {
-//        animatedCircleLoadingView.stopFailure();
-//        progressBar.setVisibility(View.GONE);
+        alertDialog.dismiss();
     }
 
     @Override
     public void showProgressBar() {
-        startLoading();
-
-//        progressBar.setVisibility(View.VISIBLE);
-
+        createDialogProgress();
     }
 
-    @Override
-    public void failureProgressBar() {
-//
-
-
+    private void createDialogProgress() {
+        alertDialog = new SpotsDialog.Builder()
+                .setContext(this)
+                .setTheme(R.style.Custom)
+                .setMessage(R.string.loading)
+                .setCancelable(false)
+                .build();
+        alertDialog.show();
     }
 
     @Override
@@ -161,5 +134,45 @@ public class GetTokenActivity extends BaseActivity implements GetTokenContract.V
         Intent i = new Intent(GetTokenActivity.this, GetValidationCodeActivity.class);
         i.putExtra("Token_Activity", 1);
         startActivity(i);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.btnGetToken:
+                getToken();
+                break;
+
+            case R.id.btnSendAgain:
+                sendSmsAgain();
+                break;
+
+        }
+
+    }
+
+    private void sendSmsAgain() {
+        Intent intent = new Intent(GetTokenActivity.this,GetValidationCodeActivity.class);
+        intent.putExtra("Token_Activity",1);
+        startActivity(intent);
+    }
+
+
+    public void getToken()
+    {
+        phoneNumber = Utils.readFromHawk("phone_number", "");
+        String confirmCode = editCheckConfirmCode.getText().toString();
+        if (!confirmCode.isEmpty() && !confirmCode.equals("") && confirmCode.length() > 4 && !phoneNumber.equals("")) {
+            int code = Integer.parseInt(confirmCode);
+            presenter.getData(phoneNumber, code);
+        } else if (confirmCode.equals("") || confirmCode.isEmpty()) {
+            editCheckConfirmCode.setText("");
+            Utils.showSnackbar(parentView, Utils.empty_confirm_number, "red");
+
+        } else {
+            editCheckConfirmCode.setText("");
+            Utils.showSnackbar(parentView, Utils.wrong_confirm_number, "red");
+        }
     }
 }

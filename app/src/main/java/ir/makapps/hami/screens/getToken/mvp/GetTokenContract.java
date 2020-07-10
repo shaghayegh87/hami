@@ -18,10 +18,6 @@ public interface GetTokenContract {
 
         void showProgressBar();
 
-//        void showPercentageProgressBar();
-
-        void failureProgressBar();
-
         void changeColorOfViews();
 
         void changeColorToFirst();
@@ -29,8 +25,6 @@ public interface GetTokenContract {
         void goToNextActivity();
 
         void getValidationCodeAgain();
-
-        void successProgressBar();
 
 
     }

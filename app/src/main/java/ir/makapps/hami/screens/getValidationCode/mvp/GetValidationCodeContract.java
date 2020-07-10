@@ -18,10 +18,6 @@ public interface GetValidationCodeContract {
 
         void showProgressBar();
 
-        void successProgressBar();
-
-        void failureProgressBar();
-
         void changeColorOfViews();
 
         void changeColorToFirst();

@@ -97,7 +97,7 @@ public class NoteFragment extends BaseFragment implements NoteFragmentContract.V
     @Override
     public void sendDataToDetail(int id) {
         Intent intent = new Intent(getActivity(), DetailActivity.class);
-        intent.putExtra("detail_id", id);
+        intent.putExtra("note_id", id);
         startActivity(intent);
     }
 

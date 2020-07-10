@@ -42,6 +42,7 @@ import com.mapbox.mapboxsdk.plugins.annotation.Symbol;
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager;
 import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,7 @@ import ir.makapps.hami.db.AppDatabase;
 import ir.makapps.hami.di.App;
 import ir.makapps.hami.model.ImageModel;
 import ir.makapps.hami.model.MainModel;
+import ir.makapps.hami.model.NoteDetailModel;
 import ir.makapps.hami.screens.base.BaseActivity;
 import ir.makapps.hami.screens.createNote.mvp.CreateNoteActivity;
 import ir.makapps.hami.screens.detail.dagger.DaggerDetailComponent;
@@ -82,7 +84,7 @@ public class DetailActivity extends BaseActivity implements DetailContract.View,
     private LinearLayout sliderDotsPanel;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private View view;
-    private int detailId,resultCode;
+    private int detailId, noteId;
     private LatLng comeFromEditingAddressPosition;
     private ProgressBar progress;
     private List<String> imagePathList;
@@ -102,17 +104,25 @@ public class DetailActivity extends BaseActivity implements DetailContract.View,
     private Boolean hasNote = false;
     private AppDatabase appDatabase;
     private NoteDao noteDao;
+    private NoteDetailModel noteDetailModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bundle = savedInstanceState;
         detailId = getIntent().getIntExtra("detail_id", 0);
+        noteId = getIntent().getIntExtra("note_id", 0);
         presenter.attachView(this);
         presenter.updateDetail(detailId);
-        appDatabase =AppDatabase.getInstance(DetailActivity.this);
+        appDatabase = AppDatabase.getInstance(DetailActivity.this);
         noteDao = appDatabase.noteDao();
-        presenter.updateNote(detailId,noteDao);
+        if (detailId > 0) {
+            presenter.updateNote(detailId, noteDao);
+        }
+
+        if (noteId > 0) {
+            presenter.getNote(noteId, noteDao);
+        }
     }
 //        if (checkInternet()) {
 //            presenter.updateDetail(home_id);
@@ -125,14 +135,13 @@ public class DetailActivity extends BaseActivity implements DetailContract.View,
     @Override
     protected void onStart() {
         super.onStart();
-        presenter.updateNote(detailId,noteDao);
+        presenter.updateNote(detailId, noteDao);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == 1)
-        {
+        if (resultCode == 1) {
             Toast.makeText(this, "onActivityResult", Toast.LENGTH_SHORT).show();
         }
     }
@@ -403,6 +412,67 @@ public class DetailActivity extends BaseActivity implements DetailContract.View,
 
     }
 
+    @Override
+    public void showNoteDetail(NoteDetailModel model) {
+        this.noteDetailModel = model;
+        txtDate.setText(mainModel.getRegisterPDate());
+        title.setText(mainModel.getTitle());
+        if (mainModel.getIsBookMarked()) {
+
+            Drawable img = getContext().getResources().getDrawable(R.drawable.ic_bookmark_fill);
+            Drawable back = getContext().getResources().getDrawable(R.drawable.radius_border_red);
+            iconBookmark.setImageDrawable(img);
+            txtBookmark.setText(R.string.bookmark_selected);
+            txtBookmark.setTextColor(getContext().getResources().getColor(R.color.red));
+            linearBookmark.setBackground(back);
+
+        }
+        if (!mainModel.getIsBookMarked()) {
+            Drawable img = getContext().getResources().getDrawable(R.drawable.ic_bookmark);
+            Drawable back = getContext().getResources().getDrawable(R.drawable.radius_border);
+            iconBookmark.setImageDrawable(img);
+            txtBookmark.setTextColor(getContext().getResources().getColor(R.color.colorGrayMedium));
+            txtBookmark.setText(R.string.bookmark_unselected);
+            linearBookmark.setBackground(back);
+//                    bookMark.setImageResource(R.drawable.ic_bookmark_black_24dp);
+        }
+        if (mainModel.getLatitude() != null && mainModel.getLongitude() != null) {
+            setLatLng(mainModel.getLatitude(), mainModel.getLongitude());
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        if (mainModel.getTitle() == null) {
+            collapsingToolbarLayout.setTitle("nulll");
+        } else {
+            collapsingToolbarLayout.setTitle(mainModel.getTitle().toString() + "");
+        }
+
+        if (mainModel.getImages().size() > 0) {
+            imagePathList = new ArrayList<>();
+            for (int i = 0; i < mainModel.getImages().size(); i++) {
+                imagePathList.add(mainModel.getImages().get(i));
+            }
+            setViewPager(imagePathList);
+        }
+        if ((mainModel.getAddress().equals(null)) || (mainModel.getAddress().equals(""))) {
+            txtAddress.setText("آدرس" + " :" + " ");
+        }
+        if ((!mainModel.getAddress().equals(null)) || !(mainModel.getAddress().equals(""))) {
+            txtAddress.setText("آدرس" + " :" + " " + mainModel.getAddress());
+        }
+
+        if ((mainModel.getDescription().equals(null)) || (mainModel.getDescription().equals(""))) {
+            txtDescription.setText("توضیحات" + " :" + " ");
+        }
+
+        if ((!mainModel.getDescription().equals(null)) || !(mainModel.getDescription().equals(""))) {
+            txtDescription.setText("توضیحات" + " :" + " " + mainModel.getDescription());
+        }
+    }
 
     @Override
     protected void onPostResume() {
@@ -418,8 +488,7 @@ public class DetailActivity extends BaseActivity implements DetailContract.View,
     @Override
     public void onClick(View view) {
 
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.linear_bookmark:
                 if (mainModel.getIsBookMarked()) {
                     presenter.deleteBookmark(detailId);
@@ -431,10 +500,21 @@ public class DetailActivity extends BaseActivity implements DetailContract.View,
                 break;
 
             case R.id.linear_note:
-                Intent intent = new Intent(DetailActivity.this, CreateNoteActivity.class);
-                intent.putExtra("detail_id",detailId);
-//                intent.putExtra("mainModel", (Parcelable) mainModel);
+
+
+                Intent intent = new Intent(this,CreateNoteActivity.class);
+                intent.putExtra("detail_id",mainModel.getId());
+                intent.putExtra("title",mainModel.getTitle());
+                intent.putExtra("description",mainModel.getDescription());
+                intent.putExtra("address",mainModel.getAddress());
+                intent.putExtra("id",mainModel.getId());
+                intent.putExtra("city",mainModel.getStateName());
+                intent.putExtra("date",mainModel.getRegisterPDate());
+                intent.putExtra("image",mainModel.getImages().get(0));
                 startActivity(intent);
+
+                break;
+
         }
 
     }
@@ -526,4 +606,10 @@ public class DetailActivity extends BaseActivity implements DetailContract.View,
 
         });
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        finish();
+//    }
 }
