@@ -9,7 +9,7 @@ import ir.makapps.hami.model.NoteDetailModel;
 import ir.makapps.hami.model.NoteModel;
 import ir.makapps.hami.screens.main.fragments.note.NoteDao;
 
-@Database(entities = {NoteDetailModel.class},version = 2,exportSchema = true)
+@Database(entities = {NoteDetailModel.class},version = 3,exportSchema = true)
 
 public abstract class AppDatabase extends RoomDatabase {
     public abstract NoteDao noteDao();

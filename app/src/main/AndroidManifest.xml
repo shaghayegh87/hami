@@ -44,6 +44,7 @@
         <activity android:name=".screens.getValidationCode.mvp.GetValidationCodeActivity" />
         <activity android:name=".screens.getToken.mvp.GetTokenActivity" />
         <activity android:name=".screens.createNote.mvp.CreateNoteActivity" />
+        <activity android:name=".screens.profile.usersAdvertises.mvp.UsersAdvertisesActivity" />
         <activity android:name=".screens.splash.mvp.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

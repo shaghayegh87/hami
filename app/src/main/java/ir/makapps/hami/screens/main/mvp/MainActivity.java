@@ -2,7 +2,9 @@ package ir.makapps.hami.screens.main.mvp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,6 +22,7 @@ import ir.makapps.hami.screens.main.fragments.bookmark.mvp.BookmarkFragment;
 import ir.makapps.hami.screens.main.dagger.DaggerMainComponent;
 import ir.makapps.hami.screens.main.fragments.home.mvp.HomeFragment;
 import ir.makapps.hami.screens.main.fragments.note.mvp.NoteFragment;
+import ir.makapps.hami.screens.profile.usersAdvertises.mvp.UsersAdvertisesActivity;
 
 
 public class MainActivity extends BaseActivity implements MainContract.View {
@@ -43,6 +46,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private static final int bookmark_id = 3;
     private static final int note_id = 4;
     private static final int profile_id = 5;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +105,18 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         meowBottomNavigation.add(new MeowBottomNavigation.Model(profile_id, R.drawable.ic_user));
 
 
+        navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId())
+                {
+                    case R.id.nav_advertise:
+                        startActivity(new Intent(MainActivity.this, UsersAdvertisesActivity.class));
+                        return true;
+                }
+                return false;
+            }
+        });
         if (homeFragment == null) {
             setFragment(new HomeFragment());
         } else setFragment(homeFragment);

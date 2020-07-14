@@ -8,10 +8,10 @@
             android:icon="@drawable/ic_megaphone"
             android:id="@+id/nav_advertise"
             android:title="@string/my_advertise" />
-        <item
-            android:icon="@drawable/ic_bookmark_black_24dp"
-            android:id="@+id/nav_bookmark"
-            android:title="@string/bookmarks" />
+<!--        <item-->
+<!--            android:icon="@drawable/ic_bookmark_black_24dp"-->
+<!--            android:id="@+id/nav_bookmark"-->
+<!--            android:title="@string/bookmarks" />-->
         <!--<item-->
             <!--android:id="@+id/nav_sales"-->
             <!--android:title="فروش"-->

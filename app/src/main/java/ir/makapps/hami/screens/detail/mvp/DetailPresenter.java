@@ -133,6 +133,24 @@ public class DetailPresenter implements DetailContract.Presenter {
     }
 
     @Override
+    public void saveNote(NoteDetailModel model, NoteDao noteDao) {
+        noteDao.save(model);
+    }
+
+    @Override
+    public boolean hasNote(int objectId, NoteDao noteDao) {
+        boolean result = false;
+         NoteDetailModel model= noteDao.edit(objectId) != null ? noteDao.edit(objectId) : new NoteDetailModel();
+        if(model.getIdObject()>0)
+        {
+            result = true;
+            view.fillNote();
+        }
+        return result;
+
+    }
+
+    @Override
     public void updateNote(int id,NoteDao noteDao) {
         NoteDetailModel model = noteDao.edit(id) != null ? noteDao.edit(id) : new NoteDetailModel();
         if(model.getIdObject() > 0)

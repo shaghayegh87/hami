@@ -69,7 +69,6 @@ public class HomeFragment extends BaseFragment implements HomeFragmentContract.V
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                showProgressBar();
                 presenter.refreshMainList();
             }
         });

@@ -22,6 +22,7 @@ public class MainBriefModel {
     @SerializedName("Title")
     private String title;
 
+
     public String getDescription() {
         return description;
     }

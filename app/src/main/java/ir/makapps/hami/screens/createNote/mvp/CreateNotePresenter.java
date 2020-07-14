@@ -124,6 +124,7 @@ public class CreateNotePresenter implements CreateNoteContract.Presenter {
                 });
     }
 
+
     @Override
     public void updateNote(int id, NoteDao noteDao) {
         NoteDetailModel model = noteDao.edit(id) != null ?  noteDao.edit(id) : new NoteDetailModel();

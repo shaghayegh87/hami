@@ -1,28 +1,23 @@
-package ir.makapps.hami.screens.main.fragments.note.recycler;
+package ir.makapps.hami.screens.profile.usersAdvertises.recycler;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.cardview.widget.CardView;
-
 import com.squareup.picasso.Picasso;
-
 import ir.makapps.hami.R;
 import ir.makapps.hami.model.MainBriefModel;
-import ir.makapps.hami.model.NoteDetailModel;
-import ir.makapps.hami.model.NoteModel;
 import ir.makapps.hami.screens.base.BaseViewHolder;
 
 
-public class NoteViewHolder extends BaseViewHolder implements NoteRecyclerContract.HomeViewHolder {
+public class UsersAdvertiseViewHolder extends BaseViewHolder implements UsersAdvertiseRecyclerContract.AdvertisesUserViewHolder {
     private TextView title, description,city;
     private ImageView img;
     private CardView main;
-    private NoteRecyclerContract.HomeAdapter presenter;
+    private UsersAdvertiseRecyclerContract.AdvertisesUserAdapter presenter;
 
-    public NoteViewHolder(final ViewGroup parent, final NoteRecyclerContract.HomeAdapter presenter) {
+    public UsersAdvertiseViewHolder(final ViewGroup parent, final UsersAdvertiseRecyclerContract.AdvertisesUserAdapter presenter) {
         super(parent, R.layout.home_list_item);
         this.presenter = presenter;
         title = itemView.findViewById(R.id.title_home);
@@ -41,21 +36,21 @@ public class NoteViewHolder extends BaseViewHolder implements NoteRecyclerContra
 
 
     @Override
-    public void fillData(final NoteDetailModel data) {
+    public void fillData(final MainBriefModel data) {
         main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.sendToDetailActivity(data.getIdObject());
+                presenter.sendToDetailActivity(data.getId());
             }
         });
 
         title.setText(data.getTitle());
-        city.setText(data.getCity());
+        city.setText(data.getStateName());
         description.setText(data.getDescription());
-        if (data.getImagePath().equals("")) {
+        if (data.getImage().equals("")) {
             Picasso.get().load(R.drawable.ic_picture).placeholder(R.drawable.ic_picture).into(img);
         } else {
-            Picasso.get().load(data.getImagePath()).into(img);
+            Picasso.get().load(data.getImage()).into(img);
         }
 
 

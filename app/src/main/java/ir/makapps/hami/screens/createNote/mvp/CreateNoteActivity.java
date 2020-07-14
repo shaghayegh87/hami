@@ -100,7 +100,13 @@ public class CreateNoteActivity extends BaseActivity implements CreateNoteContra
     public void insertToLocalDb() {
         String noteText = edtCreateNote.getText().toString();
         NoteDetailModel model = noteDao.edit(detailId)!= null ? noteDao.edit(detailId) : new NoteDetailModel();
-        if (noteText.length() > 0) {
+        if (noteText.trim().length()==0) {
+            noteDao.delete(model);
+            Utils.showSnackbar(constraintNote,getApplicationContext().getResources().getString(R.string.remove_note_success),"green");
+            edtCreateNote.setText("");
+            finish();
+        }
+        else {
             if (model.getIdObject() == 0) {
                 model.setIdObject(detailId);
                 model.setAddress(address);
@@ -110,7 +116,6 @@ public class CreateNoteActivity extends BaseActivity implements CreateNoteContra
                 model.setDate(date);
                 model.setCity(city);
                 model.setText(noteText);
-//                model.setDate();
                 noteDao.save(model);
                 Utils.showSnackbar(constraintNote,getApplicationContext().getResources().getString(R.string.insert_note_success),"green");
                 edtCreateNote.setText("");
@@ -124,23 +129,6 @@ public class CreateNoteActivity extends BaseActivity implements CreateNoteContra
                 finish();
             }
         }
-        else {
-            noteDao.delete(model);
-            Utils.showSnackbar(constraintNote,getApplicationContext().getResources().getString(R.string.remove_note_success),"green");
-            edtCreateNote.setText("");
-            finish();
-        }
-//            NoteModel noteModel = new NoteModel();
-//            noteModel.setText(noteText);
-//            noteModel.setIdObject(detailId);
-//            noteDao.save(noteModel);
-//            edtCreateNote.setText("");
-//            Utils.showSnackbar(constraintNote,"یادداشت شما ذخیره شد.","green");
-//            Intent intent = new Intent(CreateNoteActivity.this, DetailActivity.class);
-//            intent.putExtra("detail_id",detailId);
-//            intent.putExtra("hasNote",true);
-//            startActivity(intent);
-
     }
 
     @Override

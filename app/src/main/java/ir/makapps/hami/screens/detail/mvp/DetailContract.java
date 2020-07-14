@@ -35,11 +35,15 @@ public interface DetailContract {
 
         void updateNote(int id, NoteDao noteDao);
 
+        void saveNote(NoteDetailModel model, NoteDao noteDao);
+
         void saveBookmark(int id);
 
         void deleteBookmark(int id);
 
         void getNote(int noteId, NoteDao noteDao);
+
+        boolean hasNote(int objectId, NoteDao noteDao);
     }
 
     interface Model {

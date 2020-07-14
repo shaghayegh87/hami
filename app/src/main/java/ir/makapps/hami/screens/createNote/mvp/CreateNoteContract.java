@@ -32,6 +32,8 @@ public interface CreateNoteContract {
         void deleteBookmark(int id);
 
         void updateNote(int id, NoteDao noteDao);
+
+
     }
 
     interface Model {

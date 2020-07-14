@@ -118,6 +118,7 @@ public class DetailActivity extends BaseActivity implements DetailContract.View,
         noteDao = appDatabase.noteDao();
         if (detailId > 0) {
             presenter.updateNote(detailId, noteDao);
+            presenter.hasNote(detailId,noteDao);
         }
 
         if (noteId > 0) {
@@ -344,18 +345,12 @@ public class DetailActivity extends BaseActivity implements DetailContract.View,
         });
     }
 
-    //    @Override
-    public boolean checkInternet() {
-        return presenter.getInternet();
-    }
-
     @Override
     public void showDetail(MainModel mainModel) {
         this.mainModel = mainModel;
         txtDate.setText(mainModel.getRegisterPDate());
         title.setText(mainModel.getTitle());
         if (mainModel.getIsBookMarked()) {
-
             Drawable img = getContext().getResources().getDrawable(R.drawable.ic_bookmark_fill);
             Drawable back = getContext().getResources().getDrawable(R.drawable.radius_border_red);
             iconBookmark.setImageDrawable(img);
